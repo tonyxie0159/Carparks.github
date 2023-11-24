@@ -1,4 +1,27 @@
 
+//安裝提示
+let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installButton').style.display = 'block';
+  });
+
+  document.getElementById('installButton').addEventListener('click', () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+      });
+    }
+  });
+
 //用戶定位請求
 async function getUserPosition() {
     return new Promise((resolve, reject) => {
@@ -110,7 +133,7 @@ document
         
         //搜尋欄字元合法才與後端交互
         if (isValidInput(keyword)) {
-            fetch(API_BASE_URL+`/${searchURL}`, {
+            fetch("/api"+`${searchURL}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -137,7 +160,7 @@ document
     .getElementById("getLocationButton")
     .addEventListener("click", async () => {
         const data = await getUserPosition();
-        fetch(API_BASE_URL+"/location", {
+        fetch("/api/location", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -85,14 +85,16 @@ router.post('/search', async (req, res) => {
     return regex.test(input);
   }
 
-  if (!isValidInput(keyword)) {
-    res.status(400)
-  }
+  
 
   const findCarpark = async () => {
     try {
       const keyword = req.query.keyword;
 
+      if (!isValidInput(keyword)) {
+        res.status(400)
+      }
+      
       let selectedOption;
       if (req.body.selectedOption === "請選擇行政區") {
          selectedOption = "";

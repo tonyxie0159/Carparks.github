@@ -1,18 +1,19 @@
 const axios = require('axios');
 const { TYcarpark } = require("../models/TaoyuanCarparkData");
 const { TYavailability } = require("../models/TaoyuanParkingAvailability");
-
+require('dotenv').config();
 
 //GET TDX_API Token
 async function getAccessToken() {
-    const clientId = 'tonyxie0159-d2e6a63b-6685-41b5';
-    const clientSecret = 'ab5261eb-ac87-46ce-a439-3555917a9998';
+    const {TDX_CLIENTID, TDX_CLIENTSERET} = process.env;
+    const clientId = encodeURIComponent(TDX_CLIENTID);
+    const clientsecret = encodeURIComponent(TDX_CLIENTSERET);
     const tokenUrl = 'https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token';
   
     const authData = {
       grant_type: 'client_credentials',
       client_id: clientId, 
-      client_secret: clientSecret,
+      client_secret: clientsecret,
     };
   
     const authHeader = {
