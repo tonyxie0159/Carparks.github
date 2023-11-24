@@ -5,11 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start app.js",
-    "stop": "pm2 stop app.js",
-    "restart": "pm2 restart app.js",
-    "status": "pm2 status",
-    "logs": "pm2 logs app.js",
+    "start": "node app.js",
     "updateDB": "node updateDB.js",
     "build": "webpack --mode production --config config/webpack.config.js"
   },
