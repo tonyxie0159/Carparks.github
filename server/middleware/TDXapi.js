@@ -204,5 +204,7 @@ async function updateCarparkData() {
 
 module.exports = {
   UpdateAvailabilityData,
-  updateCarparkData
+  updateCarparkData,
+  SaveCarparkData,
+  SaveAvailabilityData
 };

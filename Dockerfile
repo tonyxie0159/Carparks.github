@@ -5,13 +5,12 @@ FROM node:18
 WORKDIR /usr/src/app
 
 # 首先複製 package.json package-lock.json到工作目錄
-COPY package*.json ./
+COPY package.json ./
 
 # 安裝套件
 RUN npm install
 
 RUN npm install -g pm2
-
 # 複製全部應用程式碼到工作目錄，從當前目錄到docker目錄
 COPY . .
 
