@@ -3,15 +3,14 @@ const TDX_api = require("../server/middleware/TDXapi");
 require('dotenv').config();
 
 
-const {MONGO_ROOT_PASSWORD, MONGO_ROOT_USERNAME, MONGO_dbName} = process.env;
-const username = encodeURIComponent(MONGO_ROOT_USERNAME);
-const password = encodeURIComponent(MONGO_ROOT_PASSWORD);
+const {MONGO_PASSWORD, MONGO_USERNAME, MONGO_dbName,MONGO_HOST,MONGODB_PORT} = process.env;
+const username = encodeURIComponent(MONGO_USERNAME);
+const password = encodeURIComponent(MONGO_PASSWORD);
 const dbName = encodeURIComponent(MONGO_dbName);
-const authMechanism = 'DEFAULT';
-const host = "127.0.0.1";
-const port = "27017";
+const host = encodeURIComponent(MONGO_HOST);
+const port = encodeURIComponent(MONGODB_PORT);
 
-const url = process.env.MONGODB_URI || `mongodb://${username}:${password}@${host}:${port}/${dbName}?authMechanism=${authMechanism}&useNewUrlParser=true&useUnifiedTopology=true`;
+const url = process.env.MONGODB_URI || `mongodb://${username}:${password}@${host}:${port}/${dbName}`;
 
 async function updateDB() {
     try{
