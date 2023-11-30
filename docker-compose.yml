@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   webservice: # 服務名稱
-    image: tonyxie0159/findcarparks-webapp-2023-mongo:latest
+    image: findcarparks-webapp-2023:latest
     ports:
       - "3000:3000"
     environment:
@@ -16,6 +16,7 @@ services:
       - .env
     volumes:
       - mongo-data:/data/db
+      - ./funtion/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
     ports:
       - "27017:27017"
 

@@ -7,10 +7,20 @@ WORKDIR /usr/src/app
 # 首先複製 package.json package-lock.json到工作目錄
 COPY package.json ./
 
+# 將本地的 .env 文件複製到容器中
+COPY .env /path/in/container/.env
+
+#複製運行腳本
+COPY start.sh .
+
 # 安裝套件
 RUN npm install
 
 RUN npm install -g pm2
+
+#設定.sh腳本執行權限
+RUN chmod +x start.sh
+
 # 複製全部應用程式碼到工作目錄，從當前目錄到docker目錄
 COPY . .
 
@@ -18,7 +28,7 @@ COPY . .
 EXPOSE 3000
 
 #啟動指令
-CMD [ "pm2-runtime","app.js" ]
+CMD ["./start.sh"]
 
 
 # docker run <image>：從映像檔建立並啟動一個新的容器。
