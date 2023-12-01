@@ -28,7 +28,7 @@ COPY . .
 EXPOSE 3000
 
 #啟動指令
-CMD ["./start.sh"]
+CMD ["pm2-runtime","app.js"]
 
 
 # docker run <image>：從映像檔建立並啟動一個新的容器。

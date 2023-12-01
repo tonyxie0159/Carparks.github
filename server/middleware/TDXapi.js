@@ -81,7 +81,6 @@ async function SaveAvailabilityData() {
         FullStatus: park.FullStatus,
       });
       await newAvailability.save();
-      console.log('資料儲存成功!');
     });
   }catch (err) {
     console.log('Error:', err);
@@ -108,7 +107,6 @@ async function SaveCarparkData() {
         VehicleRestriction: park.VehicleRestriction,
       });
       await newCarPark.save();
-      console.log('資料儲存成功!');
     });
   } catch (err) {
     console.log('Error:', err);

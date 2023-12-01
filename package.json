@@ -6,8 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "pm2 app.js",
-    "initDB": "node ./funtion/init-mongo.js",
-    "deployDB": "node ./funtion/deployDB.js",
     "build": "webpack --mode production --config config/webpack.config.js"
   },
   "author": "",

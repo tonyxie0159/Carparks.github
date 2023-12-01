@@ -3,16 +3,14 @@ const { TYcarpark } = require("../server/models/TaoyuanCarparkData");
 const { TYavailability } = require("../server/models/TaoyuanParkingAvailability");
 require('dotenv').config();
 
-const {MONGO_PASSWORD, MONGO_USERNAME, MONGO_dbName,MONGO_HOST,MONGODB_PORT} = process.env;
+const {MONGO_USERNAME, MONGO_PASSWORD, MONGO_dbName,MONGO_HOST,MONGODB_PORT} = process.env;
 const username = encodeURIComponent(MONGO_USERNAME);
 const password = encodeURIComponent(MONGO_PASSWORD);
 const dbName = encodeURIComponent(MONGO_dbName);
 const host = encodeURIComponent(MONGO_HOST);
 const port = encodeURIComponent(MONGODB_PORT);
 
-const url = process.env.MONGODB_URI || `mongodb://${username}:${password}@${host}:${port}/${dbName}`;
-
-db.set("strictQuery", true);
+const url = process.env.MONGODB_URI || `mongodb://${username}:${password}@${host}:${port}`;
 
 
 db.connect(url)
