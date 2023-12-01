@@ -8,7 +8,6 @@ const cors = require("cors");
 const path = require("path");
 const cron = require('node-cron');
 const TDX_api = require("./server/middleware/TDXapi");
-const logger = require("morgan");
 const createError = require("http-errors");
 
 const app = express();
@@ -17,7 +16,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views')); // 設置視圖模板的目錄路徑
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+
 //解析請求內的JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
