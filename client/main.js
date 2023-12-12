@@ -92,8 +92,6 @@ function renderDataToTable(data) {
         const moreInfoButton = document.createElement("button");
         moreInfoButton.type = "button";
         moreInfoButton.classList.add("btn", "btn-primary");
-        moreInfoButton.dataset.toggle = "modal";
-        moreInfoButton.dataset.target = "#Modal";
         moreInfoButton.textContent = "更多資訊";
         moreInfoButton.addEventListener("click", () => {
             showMoreInfoModal(item);
@@ -111,24 +109,16 @@ function renderDataToTable(data) {
 
 // 顯示更多資訊的彈窗
 function showMoreInfoModal(item) {
-    // 設定模態窗口內容
-    document.getElementById("contactPhone").innerText = "連絡電話：" + item.Telephone;
-    document.getElementById("address").innerText = "地址：" + item.Address;
-    document.getElementById("totalSpaces").innerText = "總車位：" + item.TotalSpaces;
-    document.getElementById("distance").innerText = "距離(公里)：" + item.CarParkDistance;
-
-    // 設定營業狀況
-    const statusElement = document.getElementById("status");
-    if (item.ServiceStatus === 1) {
-        statusElement.innerText = "營業中";
-    } else if (item.ServiceStatus === 0) {
-        statusElement.innerText = "未營業";
-    } else {
-        statusElement.innerText = "錯誤";
-    }
-
-    // 顯示模態窗口
-    $('#Modal').modal('show')
+    Swal.fire({
+        title: '更多資訊',
+        html: `<p>連絡電話：${item.Telephone}</p>
+               <p>地址：${item.Address}</p>
+               <p>總車位：${item.TotalSpaces}</p>
+               <p>距離(公里)：${item.CarParkDistance}</p>
+               <p>營業狀況：${item.ServiceStatus === 1 ? '營業中' : (item.ServiceStatus === 0 ? '未營業' : '錯誤')}</p>`,
+        showCloseButton: true,
+        confirmButtonText: '確定'
+    });
 }
 
 
