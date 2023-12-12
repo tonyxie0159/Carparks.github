@@ -1,6 +1,6 @@
 {
   "name": "桃園停車場車位查詢",
-  "short_name": "桃園停車位查詢",
+  "short_name": "桃園車位查詢",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",

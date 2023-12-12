@@ -1,26 +1,25 @@
-
 //安裝提示
 let deferredPrompt;
 
-  window.addEventListener('beforeinstallprompt', (e) => {
+window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     document.getElementById('installButton').style.display = 'block';
-  });
+});
 
-  document.getElementById('installButton').addEventListener('click', () => {
+document.getElementById('installButton').addEventListener('click', () => {
     if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt');
-        } else {
-          console.log('User dismissed the install prompt');
-        }
-        deferredPrompt = null;
-      });
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            } else {
+                console.log('User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+        });
     }
-  });
+});
 
 //用戶定位請求
 async function getUserPosition() {
@@ -70,42 +69,68 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 //渲染table
 function renderDataToTable(data) {
-    const table = document
-        .getElementById("data-table")
-        .getElementsByTagName("tbody")[0];
+    const table = document.getElementById("data-table").getElementsByTagName("tbody")[0];
 
-    //清空表格
+    // 清空表格
     while (table.firstChild) {
         table.removeChild(table.firstChild);
     }
 
     data.forEach((item) => {
         const row = table.insertRow();
+
+        // 顯示停車場名稱和剩餘空位
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
         const cell3 = row.insertCell(2);
         const cell4 = row.insertCell(3);
-        const cell5 = row.insertCell(4);
-        const cell6 = row.insertCell(5);
-        const cell7 = row.insertCell(6);
 
         cell1.innerHTML = item.CarParkName;
-        cell2.innerHTML = item.Address;
-        cell3.innerHTML = item.Telephone;
-        cell4.innerHTML = item.AvailableSpaces;
-        cell5.innerHTML = item.TotalSpaces;
-        cell6.innerHTML = item.CarParkDistance;
-        cell7.innerHTML = item.TotalSpaces;
+        cell2.innerHTML = item.AvailableSpaces;
 
-        if (item.ServiceStatus === 1) {
-            cell7.innerHTML = "營業中";
-        } else if (item.ServiceStatus === 0) {
-            cell7.innerHTML = "未營業";
-        } else {
-            cell7.innerHTML = "錯誤";
-        }
+        // 添加更多資訊按鈕
+        const moreInfoButton = document.createElement("button");
+        moreInfoButton.type = "button";
+        moreInfoButton.classList.add("btn", "btn-primary");
+        moreInfoButton.dataset.toggle = "modal";
+        moreInfoButton.dataset.target = "#Modal";
+        moreInfoButton.textContent = "更多資訊";
+        moreInfoButton.addEventListener("click", () => {
+            showMoreInfoModal(item);
+        });
+        cell3.appendChild(moreInfoButton);
+        //添加導航按鈕
+        const googleMapButton = document.createElement("button");
+        googleMapButton.textContent = "導航";
+        googleMapButton.addEventListener("click", () => {
+            alert("顯示在Google地圖");
+        });
+        cell4.appendChild(googleMapButton);
     });
 }
+
+// 顯示更多資訊的彈窗
+function showMoreInfoModal(item) {
+    // 設定模態窗口內容
+    document.getElementById("contactPhone").innerText = "連絡電話：" + item.Telephone;
+    document.getElementById("address").innerText = "地址：" + item.Address;
+    document.getElementById("totalSpaces").innerText = "總車位：" + item.TotalSpaces;
+    document.getElementById("distance").innerText = "距離(公里)：" + item.CarParkDistance;
+
+    // 設定營業狀況
+    const statusElement = document.getElementById("status");
+    if (item.ServiceStatus === 1) {
+        statusElement.innerText = "營業中";
+    } else if (item.ServiceStatus === 0) {
+        statusElement.innerText = "未營業";
+    } else {
+        statusElement.innerText = "錯誤";
+    }
+
+    // 顯示模態窗口
+    $('#Modal').modal('show')
+}
+
 
 document
     .getElementById("searchButton")
@@ -130,10 +155,10 @@ document
             selectedOption: selectedOption,
             data: data,
         };
-        
+
         //搜尋欄字元合法才與後端交互
         if (isValidInput(keyword)) {
-            fetch("/api"+`${searchURL}`, {
+            fetch("/api" + `${searchURL}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

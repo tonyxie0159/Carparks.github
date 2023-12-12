@@ -3,12 +3,12 @@ const { TYcarpark } = require("../server/models/TaoyuanCarparkData");
 const { TYavailability } = require("../server/models/TaoyuanParkingAvailability");
 require('dotenv').config();
 
-const {MONGO_URL} = process.env;
+const {MONGO_URL} = "mongodb://localhost:27017";
 
 
-const url = decodeURIComponent(MONGO_URL);
+const url = "mongodb://127.0.0.1:27017/CarParking";
 
-console.log(url)
+
 
 
 db.connect(url)
