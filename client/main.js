@@ -99,9 +99,18 @@ function renderDataToTable(data) {
         cell3.appendChild(moreInfoButton);
         //添加導航按鈕
         const googleMapButton = document.createElement("button");
+        googleMapButton.type = "button";
+        googleMapButton.classList.add("btn", "btn-primary");
         googleMapButton.textContent = "導航";
-        googleMapButton.addEventListener("click", () => {
-            alert("顯示在Google地圖");
+        googleMapButton.addEventListener("click", async () => {
+            try {
+                const carparkName = item.CarParkName;
+                const url = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(carparkName)}`;
+                window.open(url, '_blank');
+            } catch (error) {
+                console.error(error);
+            }
+            
         });
         cell4.appendChild(googleMapButton);
     });
@@ -120,6 +129,7 @@ function showMoreInfoModal(item) {
         confirmButtonText: '確定'
     });
 }
+
 
 
 document
