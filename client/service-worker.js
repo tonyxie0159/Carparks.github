@@ -2,12 +2,12 @@
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open('my-cache').then((cache) => {
-            return cache.add([
+            return cache.addAll([
                 '/',
                 '/index.html',
                 '/css/style.css',
                 '/js/main.js',
-                '/icon.png'
+                '/icon/icon.png'
             ]);
         })
     );

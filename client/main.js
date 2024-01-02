@@ -92,7 +92,7 @@ function renderDataToTable(data) {
         const moreInfoButton = document.createElement("button");
         moreInfoButton.type = "button";
         moreInfoButton.classList.add("btn", "btn-primary");
-        moreInfoButton.textContent = "更多";
+        moreInfoButton.textContent = "詳細";
         moreInfoButton.addEventListener("click", () => {
             showMoreInfoModal(item);
         });
@@ -119,7 +119,7 @@ function renderDataToTable(data) {
 // 顯示更多資訊的彈窗
 function showMoreInfoModal(item) {
     Swal.fire({
-        title: '更多資訊',
+        title: '詳細資訊',
         html: `<p>連絡電話：${item.Telephone}</p>
                <p>地址：${item.Address}</p>
                <p>總車位：${item.TotalSpaces}</p>
