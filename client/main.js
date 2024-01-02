@@ -92,7 +92,7 @@ function renderDataToTable(data) {
         const moreInfoButton = document.createElement("button");
         moreInfoButton.type = "button";
         moreInfoButton.classList.add("btn", "btn-primary");
-        moreInfoButton.textContent = "更多資訊";
+        moreInfoButton.textContent = "更多";
         moreInfoButton.addEventListener("click", () => {
             showMoreInfoModal(item);
         });

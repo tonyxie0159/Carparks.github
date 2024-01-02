@@ -7,7 +7,7 @@ const router = require('./server/router/router');
 const cors = require("cors");
 const path = require("path");
 const cron = require('node-cron');
-const TDX_api = require("./server/middleware/TDXapi");
+const TDX_api = require("./server/funtions/TDXapi");
 const createError = require("http-errors");
 
 const app = express();

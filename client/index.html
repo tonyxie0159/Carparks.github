@@ -15,6 +15,9 @@
           .catch((error) => {
             console.error("Service Worker registration failed:", error);
           });
+      } else {
+        // 不支援 Service Worker
+        console.warn('您的瀏覽器不支援 Service Worker，建議升級至最新版本。');
       }
     </script>
     <meta
@@ -31,10 +34,9 @@
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
     />
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHatPGcgJdFuutpijdnrwTQhVwYg8c5qg&libraries=places&callback=initMap" async defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
     <script src="bundle.js" defer></script>
@@ -102,7 +104,7 @@
           <thead class="thead-dark">
             <tr>
               <th>停車場名稱</th>
-              <th>剩餘空位</th>
+              <th style= 'white-space:nowrap' >剩餘空位</th>
               <th>更多資訊</th>
               <th>導航</th>
             </tr>

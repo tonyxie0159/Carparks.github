@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const TDX = require("../middleware/TDXapi");
+const TDX = require("../funtions/TDXapi");
 const { TYcarpark } = require("../models/TaoyuanCarparkData");
 const { TYavailability } = require("../models/TaoyuanParkingAvailability");
 

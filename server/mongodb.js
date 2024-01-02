@@ -2,7 +2,7 @@ const db = require("mongoose");
 const { TYcarpark } = require("../server/models/TaoyuanCarparkData");
 const { TYavailability } = require("../server/models/TaoyuanParkingAvailability");
 require('dotenv').config();
-const dbupdate = require("./middleware/TDXapi");
+const dbupdate = require("./funtions/TDXapi");
 
 
 const {MONGO_URL} = process.env;
